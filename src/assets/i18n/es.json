@@ -1,0 +1,15 @@
+{
+  "character": "Búsqueda de personajes",
+  "title.series": "Series del personaje con id: ",
+  "filter.advice.num_characteres": "Escribe un número mínimo de caracteres y pulsa intro",
+  "filter.results": "Resultado para la búsqueda",
+  "filter": "Buscar",
+  "name": "Nombre",
+  "description": "Descripción",
+  "view.series": "Ver series",
+  "back": "Volver",
+  "search.series.character": "Consultar series del personaje",
+  "number.results.count": "Número de resultados mostrados: {{param}}",
+  "number.results.total": "Número de resultados totales: {{param}}",
+  "number.results.advice": "Más resultados de los mostrados, acote la búsqueda"
+}

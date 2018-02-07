@@ -1,0 +1,45 @@
+<app-snack-bar></app-snack-bar>
+<mat-toolbar color="primary">
+  <span>{{'character' | translate }}</span>
+</mat-toolbar>
+<mat-sidenav-container fullscreen>
+  <div class="content">
+    <mat-form-field>
+      <input #searchInput matInput (keyup)="changeValue($event)" name="filter_search"
+        placeholder="{{'filter' | translate}}"/>
+      <mat-hint align="start">{{'filter.advice.num_characteres' | translate}}</mat-hint>
+    </mat-form-field>
+
+    <div class="results"><h3 *ngIf="filter" >{{'filter.results' | translate}}: {{filter}}</h3></div>
+
+    <div class="loading-shade" *ngIf="showProgress">
+      <mat-progress-spinner mode="indeterminate" ></mat-progress-spinner>
+    </div>
+
+    <mat-table #table [dataSource]="datasource" matSort
+      matSortActive="name" matSortDisableClear matSortDirection="asc">
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name" >
+        <mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true"> {{ 'name' | translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let character"> {{character.name}} </mat-cell>
+      </ng-container>
+
+      <!-- Description Column -->
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef> {{ 'description' | translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let character"> {{character.description}} </mat-cell>
+      </ng-container>
+
+      <!-- Ver Series Column -->
+      <ng-container matColumnDef="series">
+        <mat-header-cell *matHeaderCellDef> {{ 'view.series' | translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let character"><i (click)="viewSeries(character.id)"
+          title="{{ 'search.series.character' | translate }}" class="material-icons md-36 icon-button">pageview</i>  </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+</mat-sidenav-container>

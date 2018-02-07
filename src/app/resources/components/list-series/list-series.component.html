@@ -1,0 +1,51 @@
+<app-snack-bar></app-snack-bar>
+<mat-toolbar color="primary">
+    <i class="material-icons icon-button" (click)='back()' title="{{ 'back' | translate }}">reply</i>
+  <span>{{ 'title.series' | translate }} {{characterId}}</span>
+</mat-toolbar>
+<mat-sidenav-container fullscreen>
+  <div class="content">
+    <mat-form-field>
+      <input #searchInput matInput (keyup)="changeValue($event)" name="filter_search"
+        placeholder="Filter"/>
+      <mat-hint align="start">{{'filter.advice.num_characteres' | translate}}</mat-hint>
+    </mat-form-field>
+
+    <div class="results"><h3 *ngIf="filter" >{{'filter.results' | translate}}: {{filter}}</h3></div>
+
+    <div class="loading-shade" *ngIf="showProgress">
+      <mat-progress-spinner mode="indeterminate" ></mat-progress-spinner>
+    </div>
+
+    <mat-table #table [dataSource]="datasource" matSort
+      matSortActive="title" matSortDisableClear matSortDirection="asc">
+
+      <!-- Title Column -->
+      <ng-container matColumnDef="title" >
+        <mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true"> {{ 'title' | translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let serie"> {{serie.title}} </mat-cell>
+      </ng-container>
+
+      <!-- Description Column -->
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef> {{ 'description' | translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let serie"> {{serie.description}} </mat-cell>
+      </ng-container>
+
+      <!-- Start Year Column -->
+      <ng-container matColumnDef="startYear">
+        <mat-header-cell *matHeaderCellDef> {{ 'year.start' | translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let serie"> {{serie.startYear}} </mat-cell>
+      </ng-container>
+
+      <!-- End Year Column -->
+      <ng-container matColumnDef="endYear">
+        <mat-header-cell *matHeaderCellDef> {{ 'year.end' | translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let serie"> {{serie.endYear}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+</mat-sidenav-container>
